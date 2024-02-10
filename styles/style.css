@@ -1,20 +1,365 @@
-/* Здесь вы напишете основную часть стилей страницы.
-
-Будьте внимательны! Для корректной работы скриптов на этом сайте нужно, чтобы в HTML некоторые классы были названы особым образом:
-✦ theme-dark — класс тёмной темы
-✦ theme-light — класс светлой темы
-✦ like-icon — для svg-иконки анимированного сердца
-✦ card__like-button — для кнопки Like рядом с иконкой
-✦ card__icon-button — для кнопки, оборачивающей иконку
-✦ card__icon-button — для кнопки, оборачивающей иконку
-✦ is-liked — для обозначения состояния лайкнутой иконки в виде сердца
-✦ button__text — для обозначения текстового элемента внутри кнопки
-
-Кроме этого, не меняйте HTML переключателя тем. Его разметка также гарантирует работу своего скрипта.
-
-*/
-
 .page {
+  display: grid;
+  place-items: center;
+  margin-block: 102px 105px;
   min-inline-size: 320px;
   min-block-size: 100dvb;
+  font-family: var(--main-font, sans-serif);
+  font-variation-settings: 'wght' var(--min-font-weight, 400);
+  background-color: var(--bg-color, #fff);
+  color: var(--accent-color, #000);
+  background-image: var(--bg-image);
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+  font-style: normal;
+}
+
+.header {
+  display: grid;
+  line-height: normal;
+  text-transform: uppercase;
+  place-items: center;
+  border: 2px solid var(--accent-color, #000);
+  background-color: var(--bg-color, #fff);
+  inline-size: clamp(23.1875rem, 16.0352rem + 30.5164vw, 43.5rem);
+  block-size: clamp(20.1875rem, 19.2852rem + 3.8498vw, 22.75rem);
+  font-family: var(--accent-font, fantasy);
+  padding-block: clamp(7.5rem, 7.1479rem + 1.5023vw, 8.5rem) 25px;
+}
+
+.header__title {
+  font-size: clamp(3.0625rem, 2.7104rem + 1.5023vw, 4.0625rem);
+  padding-block-end: 20px;
+}
+
+.header__subtitle {
+  font-size: clamp(0.875rem, 0.6769rem + 0.8451vw, 1.4375rem);
+  padding-block-end: 20px;
+}
+
+.theme-menu__list {
+  margin-inline-start: clamp(1.3125rem, 1.3785rem + -0.2817vw, 1.125rem);
+}
+
+.theme-menu__item:not(:last-child) {
+  margin-block-end: 8px;
+}
+
+.theme-menu__button {
+  position: relative;
+  font-size: 14px;
+  background-color: transparent;
+  border: transparent;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+.theme-menu__button:disabled::before {
+  content: "▶";
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  inset: 0;
+  animation: loading 0.5s infinite alternate ease-in-out;
+}
+
+.theme-menu__button:disabled {
+  color: var(--decoration, rgba(0 0 0 / 0.6));
+  pointer-events: none;
+}
+
+.theme-menu__button:hover {
+  color: var(--decoration, rgba(0 0 0 / 0.6));
+  cursor: pointer;
+}
+
+.theme-menu__button::after {
+  content: '';
+  display: block;
+  width: 0%;
+  height: 3px;
+  background-color: currentColor;
+  transition: width 0.3s ease;
+}
+
+.theme-menu__button:focus-visible, 
+.theme-menu__button:focus {
+  outline: none;
+  color: var(--decoration, rgba(0 0 0 / 0.6));
+}
+
+.theme-menu__button:focus-visible::after {
+  width: 100%;
+}
+
+.main {
+  display: grid;
+  place-items: center;
+  gap: 50px;
+}
+
+.article {
+  display: grid;
+  border: 2px solid var(--accent-color, #000);
+  background-color: var(--bg-color, #fff);
+  inline-size: clamp(23.1875rem, 16.0352rem + 30.5164vw, 43.5rem);
+}
+
+.article:first-child {
+  margin-block-start: 100px;
+}
+
+.article__title {
+  font-variation-settings: 'wght' var(--max-font-weight, 700);
+  font-size: 18px;
+  line-height: normal;
+  margin: 4px 25px 4px 8px;
+}
+
+.article__picture {
+  inline-size: 100%;
+  height: 375px;
+  position: relative;
+}
+
+.article__picture-label {
+  position: absolute;
+  font-family: var(--accent-font, fantasy);
+  font-size: 14px;
+  font-variation-settings: 'wght' var(--min-font-weight, 400);
+  line-height: normal;
+  text-transform: uppercase;
+  color: var(--accent-color, #000);
+  opacity: 0.5;
+  mix-blend-mode: hard-light;
+  z-index: 1;
+  right: 25px;
+  top: 30px;
+}
+
+@supports((text-stroke: 1px var(--bg-color, #fff)) 
+or (-webkit-text-stroke: 1px var(--bg-color, #fff))) {
+  .article__picture-label {
+    -webkit-text-stroke: 1px var(--bg-color, #fff);
+    text-stroke: 1px var(--bg-color, #fff);
+    text-shadow: none;
+  }
+}
+
+.article__picture-card {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.article__picture-card_filter_brightness {
+  filter: brightness(200%);
+}
+
+.article__picture-card_filter_combo {
+  filter: invert(1) brightness(300%) saturate(60%) hue-rotate(90deg);
+}
+
+.article__picture-card_filter_blur {
+  filter: blur(0.2rem);
+}
+
+.article__picture-card_filter_opicity {
+  filter: opacity(0.7);
+}
+
+.article__picture-card_filter_grayscale {
+  filter: grayscale(0.8);
+}
+
+.article__picture-card_filter_invert {
+  filter: invert(0.7);
+}
+
+.article__picture-card_filter_hue-rotate {
+  filter: hue-rotate(-90deg);
+}
+
+.article__picture-card_filter_sepia {
+  filter: sepia(99%);
+}
+
+.article__content {
+  font-size: 18px;
+  font-variation-settings: 'wght' var(--min-font-weight, 400);
+  line-height: 20px; 
+  display: flex;
+  flex-direction: column;
+  gap: 27px;
+  margin: 27px 25px 25px;
+}
+
+.article__button {
+  height: 38px;
+  margin-inline-end: 25px;
+  margin-block-end: 25px;
+  display: flex;
+  justify-self: end;
+  gap: 12px;
+}
+
+.card__icon-button {
+  padding: 0;
+  border: 2px solid transparent;
+  background-color: transparent;
+  transition: border 0.3s ease;
+}
+
+.card__icon-button:focus-visible {
+  border: 2px solid var(--accent-color, #000);
+}
+
+.card__like-button {
+  border: 2px solid var(--accent-color, #000);
+  background-color: transparent;
+  inline-size: 130px;
+  transition: box-shadow 0.3s ease;
+  position: relative;
+}
+
+.card__like-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 0%;
+  height: 100%;
+  background-color: var(--accent-color, #000);
+  transition: width 0.5s ease-in-out;
+}
+
+.card__like-button:hover::before {
+  width: 100%;
+}
+
+.card__like-button:focus, 
+.button-save:focus {
+  box-shadow: 2px 2px 0 0 var(--accent-color, #000);
+}
+
+.button__text {
+  position: relative;
+  font-family: var(--accent-font);
+  font-size: 14px;
+  line-height: 90%;
+  color: var(--button-color, #fff);
+  mix-blend-mode: difference;
+}
+
+.button-save {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  inline-size: clamp(19.375rem, 18.7368rem + 2.723vw, 21.1875rem);
+  block-size: 55px;
+  gap: 8px;
+  background-color: var(--bg-color, #fff);
+  border: 2px solid var(--accent-color, #000);
+  transition: box-shadow 0.3s ease;
+}
+
+.button-save::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 0%;
+  height: 100%;
+  background-color: var(--accent-color, #000);
+  transition: width 0.5s ease-in-out;
+}
+
+.button-save:hover::before {
+  width: 100%;
+}
+
+.floppy {
+  width: 20px;
+  height: 20px;
+  mix-blend-mode: difference;
+  color: var(--button-color, #fff);
+}
+
+dialog {
+  inline-size: clamp(21.3125rem, 20.9604rem + 1.5023vw, 22.3125rem);
+  height: 190px;
+  background-color: var(--bg-color, #fff);
+  color: var(--accent-color, #000);
+  border: 2px solid var(--accent-color, #000);
+}
+
+dialog::backdrop {
+  background-color: rgba(0 0 0 / 0.75);
+}
+
+.dialog__content {
+  display: grid;
+  place-items: center;
+  gap: 30px;
+  margin-block-start: 16px;
+}
+
+.dialog__content-info {
+  display: flex;
+  gap: 20px;
+  justify-content: start;
+  align-items: center;
+}
+
+.dialog__content-floppy {
+  width: 39px;
+  height: 39px;
+}
+
+.dialog__text {
+  color: var(--accent-color, #000);
+  font-family: var(--accent-font, fantasy);
+  font-size: 14px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.dialog__content-title {
+  line-height: 150%;
+  width: clamp(12.375rem, 11.5827rem + 3.3803vw, 14.625rem);
+}
+
+.dialog__content-button {
+  block-size: 38px;
+  inline-size: clamp(16.0625rem, 15.2702rem + 3.3803vw, 18.3125rem);
+  background-color: transparent;
+  border: 2px solid var(--accent-color, #000);
+  position: relative;
+}
+
+.dialog__content-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 0%;
+  height: 100%;
+  background-color: var(--accent-color, #000);
+  transition: width 0.5s ease-in-out;
+}
+
+.dialog__content-button:hover::before {
+  width: 100%;
+}
+
+@media (width < 376px) {
+  .button-save {
+    block-size: 84px;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .floppy {
+    width: 39px;
+    height: 39px;
+  }
 }
