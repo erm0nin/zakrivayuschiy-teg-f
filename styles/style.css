@@ -300,7 +300,7 @@ dialog[open] {
   max-block-size: 191px;
   padding: 30px 30px 0px;
   background-color: var(--bg-color);
-  border: 2px solid var(--main-color);
+  border: 2px solid var(--accent-color);
   display: grid;
   grid-template-columns: 42px 1fr;
   grid-template-rows: repeat(2, 1fr);
