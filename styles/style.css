@@ -28,7 +28,7 @@
   padding-block: clamp(7.5rem, 7.1479rem + 1.5023vw, 8.5rem) 25px;
 }
 
-.title {
+.logo__link {
   font-size: clamp(3.0625rem, 2.7104rem + 1.5023vw, 4.0625rem);
   padding-block-end: 20px;
 }
@@ -296,17 +296,13 @@
 }
 
 dialog[open] {
-  inline-size: clamp(21.313rem, 21.048rem + 1.127vw, 22.063rem);
-  max-block-size: 191px;
-  padding: 30px 30px 0px;
-  background-color: var(--bg-color);
-  border: 2px solid var(--accent-color);
   display: grid;
-  grid-template-columns: 42px 1fr;
-  grid-template-rows: repeat(2, 1fr);
+  width: clamp(21.313rem, 21.048rem + 1.127vw, 22.063rem);
+  padding: 32px 40px;
+  background-color: var(--bg-color);
+  font-size: 14px;
+  border: 2px solid var(--accent-color, #000);
   gap: 30px;
-  justify-content: center;
-  column-gap: 20px;
 }
 
 dialog::backdrop {
